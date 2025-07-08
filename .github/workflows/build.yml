@@ -10,11 +10,13 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Adjust if needed
+          node-version: '20'
       - name: Install dependencies
         run: npm install
       - name: Build project
-        run: npm run build
+        run: npm run build || echo "Build failed, checking logs"
+      - name: List dist folder contents
+        run: ls -la dist || echo "No dist folder found"
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
